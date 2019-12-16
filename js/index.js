@@ -66,9 +66,16 @@ updateStudentFormElement.addEventListener('submit', function(event) {
         if (!this.elements[key].hasAttribute || !this.elements[key].hasAttribute('name')) continue;
 
         console.log(this.elements[key]);
-        data[this.elements[key].getAttribute('name')] = this.elements[key].value;
-
-        console.log(data);
+        data[this.elements[key].getAttribute('name')] = this.elements[key].value;    
     }
+
+    console.log(data);
+
+    database.updateStudent(data.id, data).then(responce => {
+        console.log('response', responce);
+
+        studentsListElement.querySelector(`[data-id="${data.id}"]`);
+        element.innerText = `${responce.lastname} ${responce.firstname}`
+    })
     
 });
